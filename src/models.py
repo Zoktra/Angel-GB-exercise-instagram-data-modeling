@@ -26,6 +26,25 @@ class Follower(Base):
     user_from_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     user_to_id = Column(Integer,ForeignKey('user.id'), primary_key=True)
 
+class Ignore(Base):
+    __tablename__ = 'ignore'
+    user_from_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    user_to_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+
+class Report(Base):
+    __tablename__ = 'report'
+    id = Column(Integer, primary_key=True)
+    user_report = Column(Integer, ForeignKey('user.id'))
+    user_reported = Column(Integer, ForeignKey('user.id'))
+
+class Strike(Base):
+    __tablename__ = 'strike'
+    id = Column(Integer, primary_key=True)
+    post_delete = Column(Integer, ForeignKey('post.id'))
+    user_strike = Column(Integer, ForeignKey('user.id'))
+    reason = Column(String(250), nullable=False)
+
+
 class Post(Base):
     __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
